@@ -1,26 +1,94 @@
 # ==========================
-# DEEK AI SMART DECISION ENGINE
+# DEEK AI DECISION ENGINE
+# Version: 0.2 Stable
 # ==========================
 
-from ai import ask
+CURRENT_KEYWORDS = [
+
+    # Time
+    "today",
+    "yesterday",
+    "tomorrow",
+    "latest",
+    "current",
+    "now",
+    "recent",
+    "new",
+    "breaking",
+    "live",
+    "update",
+    "updates",
+
+    # News
+    "news",
+    "headline",
+    "headlines",
+
+    # Weather
+    "weather",
+    "temperature",
+    "forecast",
+    "rain",
+    "humidity",
+    "storm",
+    "climate",
+
+    # Sports
+    "score",
+    "scores",
+    "match",
+    "won",
+    "winner",
+    "result",
+    "results",
+    "ipl",
+    "cricket",
+    "football",
+    "soccer",
+    "tennis",
+    "kabaddi",
+    "nba",
+
+    # Finance
+    "price",
+    "stock",
+    "stocks",
+    "bitcoin",
+    "crypto",
+    "gold",
+    "silver",
+    "market",
+    "share",
+
+    # Technology
+    "release",
+    "released",
+    "launch",
+    "launched",
+    "announcement",
+    "ai news",
+
+    # Elections & Government
+    "election",
+    "vote",
+    "government",
+
+    # Years
+    "2025",
+    "2026",
+    "2027",
+    "2028"
+]
 
 def needs_web_search(question):
+    """
+    Decide if the question requires live internet information.
+    """
 
-    prompt = f"""
-You are a decision engine.
+    question = question.lower()
 
-Question:
-{question}
+    for keyword in CURRENT_KEYWORDS:
+        if keyword in question:
+            return True
 
-Reply with ONLY ONE WORD.
-
-YES = Needs internet because it requires current or live information.
-
-NO = Can be answered from general knowledge.
-
-Answer:
-"""
-
-    decision = ask(prompt).strip().upper()
-
-    return decision.startswith("YES")
+    return False
