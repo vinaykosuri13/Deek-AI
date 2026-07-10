@@ -4,7 +4,7 @@ from memory import add_message
 from decision import needs_web_search
 
 print("=" * 40)
-print("🤖 DEEK AI v0.1 Alpha")
+print("🤖 DEEK AI v0.2 Alpha")
 print("Created by Vinay Kosuri")
 print("=" * 40)
 
@@ -20,13 +20,13 @@ while True:
 
     if needs_web_search(question):
 
-    print("\n🔍 Searching Internet...")
+        print("\n🔍 Searching Internet...")
 
-    results = search_web(question)
+        results = search_web(question)
 
-    context = format_results(results)
+        context = format_results(results)
 
-    prompt = f"""
+        prompt = f"""
 Use these search results to answer the user's question.
 
 Search Results:
@@ -37,13 +37,13 @@ Question:
 {question}
 """
 
-    answer = ask(prompt)
+        answer = ask(prompt)
 
-else:
+    else:
 
-    print("\n🧠 Using AI Knowledge...")
+        print("\n🧠 Using AI Knowledge...")
 
-    answer = ask(question)
+        answer = ask(question)
 
     add_message("assistant", answer)
 
