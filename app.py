@@ -1,6 +1,7 @@
 from ai import ask
 from search import search_web, format_results
 from memory import add_message
+from decision import needs_web_search
 
 print("=" * 40)
 print("🤖 DEEK AI v0.1 Alpha")
@@ -17,6 +18,8 @@ while True:
 
     add_message("user", question)
 
+    if needs_web_search(question):
+
     print("\n🔍 Searching Internet...")
 
     results = search_web(question)
@@ -24,7 +27,7 @@ while True:
     context = format_results(results)
 
     prompt = f"""
-Use the following search results to answer the question.
+Use these search results to answer the user's question.
 
 Search Results:
 
@@ -35,6 +38,12 @@ Question:
 """
 
     answer = ask(prompt)
+
+else:
+
+    print("\n🧠 Using AI Knowledge...")
+
+    answer = ask(question)
 
     add_message("assistant", answer)
 
