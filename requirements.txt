@@ -1,0 +1,7 @@
+transformers
+torch
+accelerate
+ddgs
+sentencepiece
+requests
+beautifulsoup4
