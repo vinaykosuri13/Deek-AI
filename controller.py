@@ -18,7 +18,7 @@ def process_request(question):
     print(f"Intent: {intent}")
 
     # Decide if web search is needed
-    if needs_web_search(question):
+    if intent == "SEARCH":
 
         results = search_web(question)
         context = format_results(results)
