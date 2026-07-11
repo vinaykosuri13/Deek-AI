@@ -4,6 +4,7 @@
 
 from search_tool import search_tool
 from chat_tool import chat_tool
+from response import Response
 
 TOOLS = {
     "SEARCH": search_tool,
@@ -18,9 +19,7 @@ def execute_tool(request):
     tool = TOOLS.get(request.intent)
 
     if tool:
-        return tool(request.question)
-
-    from response import Response
+        return tool(request)
 
     return Response(
         success=False,
