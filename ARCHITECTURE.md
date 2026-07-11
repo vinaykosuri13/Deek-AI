@@ -91,3 +91,21 @@ Remember or recall information.
 Example:
 - Remember my name is Vinay
 - What is my name?
+# Tool Manager
+
+The Tool Manager is responsible for selecting and executing the correct tool based on the user's intent.
+
+## Planned Tools
+
+- AI Tool
+- Search Tool
+- Memory Tool
+- Calculator Tool
+- Phone Tool
+- Message Tool
+- App Tool
+- Camera Tool
+- File Tool
+
+The controller sends the detected intent to the Tool Manager.
+The Tool Manager decides which tool to execute and returns the result.
