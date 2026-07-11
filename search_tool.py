@@ -4,6 +4,7 @@
 
 from search import search_web, format_results
 from ai import ask
+from response import Response
 
 
 def search_tool(question):
@@ -25,4 +26,7 @@ Question:
 
     answer = ask(prompt)
 
-    return answer
+    return Response(
+        success=True,
+        message=answer
+    )
