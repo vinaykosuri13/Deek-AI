@@ -5,16 +5,19 @@
 from search_tool import search_tool
 from chat_tool import chat_tool
 
+TOOLS = {
+    "SEARCH": search_tool,
+    "CHAT": chat_tool,
+}
+
 
 def execute_tool(intent, question):
 
     print(f"Selected Tool: {intent}")
 
-    if intent == "SEARCH":
-        return search_tool(question)
+    tool = TOOLS.get(intent)
 
-    elif intent == "CHAT":
-        return chat_tool(question)
+    if tool:
+        return tool(question)
 
-    else:
-        return "Tool not implemented."
+    return "Tool not implemented."
