@@ -9,6 +9,12 @@ class Planner:
         question = request.question.lower()
 
         if "summarize" in question:
-            return ["SEARCH", "CHAT"]
 
-        return [request.intent]
+            return [
+                {"tool": "SEARCH"},
+                {"tool": "CHAT"}
+            ]
+
+        return [
+            {"tool": request.intent}
+        ]
