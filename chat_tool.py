@@ -12,5 +12,6 @@ def chat_tool(question):
 
     return Response(
         success=True,
-        message=answer
+        message=answer,
+        source="CHAT"
     )
