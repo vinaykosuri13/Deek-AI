@@ -8,3 +8,6 @@ class Request:
 
         self.intent = intent
         self.question = question
+
+        # Stores the output of previous tools
+        self.context = ""
