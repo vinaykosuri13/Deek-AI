@@ -11,13 +11,13 @@ TOOLS = {
 }
 
 
-def execute_tool(intent, question):
+def execute_tool(request):
 
-    print(f"Selected Tool: {intent}")
+    print(f"Selected Tool: {request.intent}")
 
-    tool = TOOLS.get(intent)
+    tool = TOOLS.get(request.intent)
 
     if tool:
-        return tool(question)
+        return tool(request.question)
 
     return "Tool not implemented."
