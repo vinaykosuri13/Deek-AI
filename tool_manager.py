@@ -20,4 +20,10 @@ def execute_tool(request):
     if tool:
         return tool(request.question)
 
-    return "Tool not implemented."
+    from response import Response
+
+    return Response(
+        success=False,
+        message="Tool not implemented.",
+        source="TOOL_MANAGER"
+    )
