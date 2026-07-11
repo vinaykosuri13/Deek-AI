@@ -11,13 +11,18 @@ def chat_tool(request):
     if request.context:
 
         prompt = f"""
-Using the following information:
+You are an AI assistant.
 
+Using ONLY the search results below, answer the user's request.
+
+Search Results:
 {request.context}
 
-Answer the user's request:
-
+User Request:
 {request.question}
+
+If the user asked for a summary, provide a clear summary.
+If the user asked a question, answer using only the search results.
 """
 
         answer = ask(prompt)
