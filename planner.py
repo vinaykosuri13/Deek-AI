@@ -6,6 +6,9 @@ class Planner:
 
     def create_plan(self, request):
 
-        return [
-            request.intent
-        ]
+        question = request.question.lower()
+
+        if "summarize" in question:
+            return ["SEARCH", "CHAT"]
+
+        return [request.intent]
