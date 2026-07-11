@@ -7,6 +7,7 @@ from search import search_web, format_results
 from ai import ask
 from memory import add_message
 from intent import detect_intent
+from tool_manager import execute_tool
 
 
 def process_request(question):
@@ -16,6 +17,7 @@ def process_request(question):
     intent = detect_intent(question)
 
     print(f"Intent: {intent}")
+    execute_tool(intent, question)
 
     # Decide if web search is needed
     if intent == "SEARCH":
