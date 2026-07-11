@@ -2,8 +2,8 @@
 # DEEK AI TOOL MANAGER
 # ==========================
 
-def execute_tool(intent):
+def execute_tool(intent, question):
 
     print(f"Selected Tool: {intent}")
 
-    return intent
+    return f"{intent}: {question}"
