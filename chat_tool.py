@@ -6,9 +6,25 @@ from ai import ask
 from response import Response
 
 
-def chat_tool(question):
+def chat_tool(request):
 
-    answer = ask(question)
+    if request.context:
+
+        prompt = f"""
+Using the following information:
+
+{request.context}
+
+Answer the user's request:
+
+{request.question}
+"""
+
+        answer = ask(prompt)
+
+    else:
+
+        answer = ask(request.question)
 
     return Response(
         success=True,
