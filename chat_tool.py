@@ -3,10 +3,14 @@
 # ==========================
 
 from ai import ask
+from response import Response
 
 
 def chat_tool(question):
 
     answer = ask(question)
 
-    return answer
+    return Response(
+        success=True,
+        message=answer
+    )
