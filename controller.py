@@ -6,12 +6,16 @@ from decision import needs_web_search
 from search import search_web, format_results
 from ai import ask
 from memory import add_message
+from intent import detect_intent
 
 
 def process_request(question):
 
     # Save user message
     add_message("user", question)
+    intent = detect_intent(question)
+
+    print(f"Intent: {intent}")
 
     # Decide if web search is needed
     if needs_web_search(question):
