@@ -10,15 +10,22 @@ MODULES = [
     "tool_manager",
     "request",
     "response",
+    "intent",
     "search_tool",
     "chat_tool",
     "memory_tool",
     "memory_search_tool",
+    "calculator_tool",
+    "datetime_tool",
+    "planner_rules.calculator_rule",
+    "planner_rules.memory_rule",
+    "planner_rules.search_rule",
+    "planner_rules.datetime_rule",
 ]
 
-print("=" * 40)
-print("      DEEK AI TEST SUITE")
-print("=" * 40)
+print("=" * 45)
+print("        DEEK AI TEST SUITE")
+print("=" * 45)
 
 passed = 0
 
@@ -35,6 +42,6 @@ for module_name in MODULES:
         print(f"[FAIL] {module_name}")
         print(e)
 
-print("=" * 40)
+print("=" * 45)
 print(f"Passed: {passed}/{len(MODULES)}")
-print("=" * 40)
+print("=" * 45)
