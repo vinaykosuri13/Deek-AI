@@ -8,6 +8,7 @@ from memory_tool import memory_tool
 from memory_search_tool import memory_search_tool
 from calculator_tool import calculator_tool
 from datetime_tool import datetime_tool
+from weather_tool import weather_tool
 from response import Response
 
 TOOLS = {
@@ -17,6 +18,7 @@ TOOLS = {
     "MEMORY_SEARCH": memory_search_tool,
     "CALCULATOR": calculator_tool,
     "DATETIME": datetime_tool,
+    "WEATHER": weather_tool,
 }
 
 
