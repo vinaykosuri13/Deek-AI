@@ -1,47 +1,49 @@
-"""
-Deek AI Intent Detection
-Version: 0.3
-"""
+# ==========================
+# DEEK AI INTENT DETECTOR
+# ==========================
+
+import re
+
 
 def detect_intent(question):
 
-    question = question.lower()
-
-    # Search
-    if any(word in question for word in [
-        "latest", "today", "news", "weather",
-        "current", "live", "recent"
-    ]):
-        return "SEARCH"
+    question = question.lower().strip()
 
     # Calculator
-    if any(word in question for word in [
-        "calculate", "+", "-", "*", "/", "×"
-    ]):
+    if re.fullmatch(r"[0-9+\-*/().% ]+", question):
         return "CALCULATOR"
 
-    # Phone
-    if any(word in question for word in [
-        "call", "dial"
-    ]):
-        return "PHONE"
+    calculator_keywords = [
+        "calculate",
+        "compute",
+        "evaluate"
+    ]
 
-    # Message
-    if any(word in question for word in [
-        "message", "sms", "text", "send"
-    ]):
-        return "MESSAGE"
+    if any(word in question for word in calculator_keywords):
+        return "CALCULATOR"
 
-    # Apps
-    if any(word in question for word in [
-        "open", "launch", "start"
-    ]):
-        return "APP"
+    # Date & Time
+    datetime_keywords = [
+        "time",
+        "date",
+        "today",
+        "day"
+    ]
 
-    # Memory
-    if any(word in question for word in [
-        "remember", "forget", "my name"
-    ]):
-        return "MEMORY"
+    if any(word in question for word in datetime_keywords):
+        return "DATETIME"
 
+    # Search
+    search_keywords = [
+        "latest",
+        "news",
+        "search",
+        "find",
+        "look up"
+    ]
+
+    if any(word in question for word in search_keywords):
+        return "SEARCH"
+
+    # Default
     return "CHAT"
