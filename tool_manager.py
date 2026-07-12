@@ -4,25 +4,38 @@
 
 from search_tool import search_tool
 from chat_tool import chat_tool
+from memory_tool import memory_tool
 from response import Response
 
 TOOLS = {
     "SEARCH": search_tool,
     "CHAT": chat_tool,
+    "MEMORY": memory_tool,
 }
 
 
-def execute_tool(request):
+def execute_plan(plan, request):
 
-    print(f"Selected Tool: {request.intent}")
+    last_response = None
 
-    tool = TOOLS.get(request.intent)
+    for step in plan:
 
-    if tool:
-        return tool(request)
+        tool_name = step["tool"]
 
-    return Response(
-        success=False,
-        message="Tool not implemented.",
-        source="TOOL_MANAGER"
-    )
+        print(f"Selected Tool: {tool_name}")
+
+        tool = TOOLS.get(tool_name)
+
+        if tool is None:
+            return Response(
+                success=False,
+                message=f"Tool '{tool_name}' not implemented.",
+                source="TOOL_MANAGER"
+            )
+
+        last_response = tool(request)
+
+        if last_response.message:
+            request.context = last_response.message
+
+    return last_response
