@@ -42,3 +42,10 @@ def get_weather(city):
     })
 
     return response.json()
+    response = requests.get(url, params={
+        "latitude": latitude,
+        "longitude": longitude,
+        "current": "temperature_2m,weather_code"
+    })
+
+    return response.json()
