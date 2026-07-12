@@ -4,10 +4,12 @@
 
 from planner_rules.memory_rule import match as memory_rule
 from planner_rules.calculator_rule import match as calculator_rule
+from planner_rules.search_rule import match as search_rule
 
 RULES = [
     memory_rule,
     calculator_rule,
+    search_rule,
 ]
 
 
@@ -21,15 +23,6 @@ class Planner:
 
             if plan:
                 return plan
-
-        question = request.question.lower()
-
-        # Search then summarize
-        if "summarize" in question:
-            return [
-                {"tool": "SEARCH"},
-                {"tool": "CHAT"}
-            ]
 
         return [
             {"tool": request.intent}
