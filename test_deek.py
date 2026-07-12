@@ -1,6 +1,4 @@
-# ==========================
-# DEEK AI TEST SUITE
-# ==========================
+
 
 import importlib
 
@@ -17,6 +15,7 @@ MODULES = [
     "memory_search_tool",
     "calculator_tool",
     "datetime_tool",
+    "weather_service",
     "weather_tool",
     "planner_rules.calculator_rule",
     "planner_rules.memory_rule",
