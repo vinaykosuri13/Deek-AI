@@ -4,9 +4,9 @@
 
 from memory import add_message
 from intent import detect_intent
-from tool_manager import execute_tool
 from request import Request
 from planner import Planner
+from tool_manager import execute_plan
 
 
 def process_request(question):
@@ -27,8 +27,8 @@ def process_request(question):
 
     print(f"Plan: {plan}")
 
-    # Execute first tool
-    response = execute_tool(request)
+    # Execute complete plan
+    response = execute_plan(plan, request)
 
     # Save AI response
     add_message("assistant", response.message)
