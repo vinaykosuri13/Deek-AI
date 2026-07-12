@@ -13,36 +13,40 @@ def detect_intent(question):
     if re.fullmatch(r"[0-9+\-*/().% ]+", question):
         return "CALCULATOR"
 
-    calculator_keywords = [
+    if any(word in question for word in [
         "calculate",
         "compute",
         "evaluate"
-    ]
-
-    if any(word in question for word in calculator_keywords):
+    ]):
         return "CALCULATOR"
 
     # Date & Time
-    datetime_keywords = [
+    if any(word in question for word in [
         "time",
         "date",
         "today",
         "day"
-    ]
-
-    if any(word in question for word in datetime_keywords):
+    ]):
         return "DATETIME"
 
+    # Weather
+    if any(word in question for word in [
+        "weather",
+        "temperature",
+        "forecast",
+        "rain",
+        "climate"
+    ]):
+        return "WEATHER"
+
     # Search
-    search_keywords = [
+    if any(word in question for word in [
         "latest",
         "news",
         "search",
         "find",
         "look up"
-    ]
-
-    if any(word in question for word in search_keywords):
+    ]):
         return "SEARCH"
 
     # Default
