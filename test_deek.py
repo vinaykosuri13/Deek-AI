@@ -17,10 +17,12 @@ MODULES = [
     "memory_search_tool",
     "calculator_tool",
     "datetime_tool",
+    "weather_tool",
     "planner_rules.calculator_rule",
     "planner_rules.memory_rule",
     "planner_rules.search_rule",
     "planner_rules.datetime_rule",
+    "planner_rules.weather_rule",
 ]
 
 print("=" * 45)
