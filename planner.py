@@ -2,16 +2,16 @@
 # DEEK AI PLANNER
 # ==========================
 
-import re
+from planner_rules.calculator_rule import match as calculator_rule
 
 
 class Planner:
 
     def create_plan(self, request):
 
-        question = request.question.lower().strip()
+        question = request.question.lower()
 
-        # Retrieve personal information
+        # Memory retrieval
         if (
             "what's my" in question or
             "what is my" in question or
@@ -22,7 +22,7 @@ class Planner:
                 {"tool": "CHAT"}
             ]
 
-        # Save personal information
+        # Memory save
         if (
             "my name is" in question or
             "i am" in question or
@@ -34,35 +34,11 @@ class Planner:
                 {"tool": "MEMORY"}
             ]
 
-        # Natural language calculator
-        calculator_keywords = [
-            "calculate",
-            "what is",
-            "compute",
-            "evaluate"
-        ]
+        # Calculator Rule
+        plan = calculator_rule(request)
 
-        if any(keyword in question for keyword in calculator_keywords):
-
-            expression = question
-
-            for keyword in calculator_keywords:
-                expression = expression.replace(keyword, "")
-
-            expression = expression.replace("?", "").strip()
-
-            if re.fullmatch(r"[0-9+\-*/().% ]+", expression):
-                request.question = expression
-
-                return [
-                    {"tool": "CALCULATOR"}
-                ]
-
-        # Direct mathematical expression
-        if re.fullmatch(r"[0-9+\-*/().% ]+", question):
-            return [
-                {"tool": "CALCULATOR"}
-            ]
+        if plan:
+            return plan
 
         # Search then summarize
         if "summarize" in question:
