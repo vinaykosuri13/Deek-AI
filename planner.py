@@ -2,13 +2,16 @@
 # DEEK AI PLANNER
 # ==========================
 
+import re
+
+
 class Planner:
 
     def create_plan(self, request):
 
-        question = request.question.lower()
+        question = request.question.lower().strip()
 
-        # Retrieve personal information (check FIRST)
+        # Retrieve personal information
         if (
             "what's my" in question or
             "what is my" in question or
@@ -29,6 +32,12 @@ class Planner:
             return [
                 {"tool": "CHAT"},
                 {"tool": "MEMORY"}
+            ]
+
+        # Calculator
+        if re.fullmatch(r"[0-9+\-*/().% ]+", question):
+            return [
+                {"tool": "CALCULATOR"}
             ]
 
         # Search then summarize
