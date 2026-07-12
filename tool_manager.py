@@ -7,6 +7,7 @@ from chat_tool import chat_tool
 from memory_tool import memory_tool
 from memory_search_tool import memory_search_tool
 from calculator_tool import calculator_tool
+from datetime_tool import datetime_tool
 from response import Response
 
 TOOLS = {
@@ -15,6 +16,7 @@ TOOLS = {
     "MEMORY": memory_tool,
     "MEMORY_SEARCH": memory_search_tool,
     "CALCULATOR": calculator_tool,
+    "DATETIME": datetime_tool,
 }
 
 
