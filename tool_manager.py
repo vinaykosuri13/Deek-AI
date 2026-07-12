@@ -2,24 +2,10 @@
 # DEEK AI TOOL MANAGER
 # ==========================
 
-from search_tool import search_tool
-from chat_tool import chat_tool
-from memory_tool import memory_tool
-from memory_search_tool import memory_search_tool
-from calculator_tool import calculator_tool
-from datetime_tool import datetime_tool
-from weather_tool import weather_tool
+from plugin_loader import load_tools
 from response import Response
 
-TOOLS = {
-    "SEARCH": search_tool,
-    "CHAT": chat_tool,
-    "MEMORY": memory_tool,
-    "MEMORY_SEARCH": memory_search_tool,
-    "CALCULATOR": calculator_tool,
-    "DATETIME": datetime_tool,
-    "WEATHER": weather_tool,
-}
+TOOLS = load_tools()
 
 
 def execute_plan(plan, request):
@@ -35,6 +21,7 @@ def execute_plan(plan, request):
         tool = TOOLS.get(tool_name)
 
         if tool is None:
+
             return Response(
                 success=False,
                 message=f"Tool '{tool_name}' not implemented.",
