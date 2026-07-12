@@ -3,10 +3,15 @@
 # ==========================
 
 from memory import add_message
+from response import Response
 
 
-def memory_tool(role, message):
+def memory_tool(request):
 
-    add_message(role, message)
+    add_message("user", request.question)
 
-    return "Memory Updated"
+    return Response(
+        success=True,
+        message="Memory updated successfully.",
+        source="MEMORY"
+    )
