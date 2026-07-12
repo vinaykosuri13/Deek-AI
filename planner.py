@@ -34,7 +34,31 @@ class Planner:
                 {"tool": "MEMORY"}
             ]
 
-        # Calculator
+        # Natural language calculator
+        calculator_keywords = [
+            "calculate",
+            "what is",
+            "compute",
+            "evaluate"
+        ]
+
+        if any(keyword in question for keyword in calculator_keywords):
+
+            expression = question
+
+            for keyword in calculator_keywords:
+                expression = expression.replace(keyword, "")
+
+            expression = expression.replace("?", "").strip()
+
+            if re.fullmatch(r"[0-9+\-*/().% ]+", expression):
+                request.question = expression
+
+                return [
+                    {"tool": "CALCULATOR"}
+                ]
+
+        # Direct mathematical expression
         if re.fullmatch(r"[0-9+\-*/().% ]+", question):
             return [
                 {"tool": "CALCULATOR"}
