@@ -4,23 +4,29 @@
 
 conversation = []
 
-def add_message(role, content):
-    """
-    Save a message to memory.
-    """
+
+def add_message(role, message):
+
     conversation.append({
         "role": role,
-        "content": content
+        "message": message
     })
 
+
 def get_memory():
-    """
-    Return the conversation history.
-    """
+
     return conversation
 
-def clear_memory():
-    """
-    Clear the conversation history.
-    """
-    conversation.clear()
+
+def search_memory(query):
+
+    query = query.lower()
+
+    results = []
+
+    for item in conversation:
+
+        if query in item["message"].lower():
+            results.append(item)
+
+    return results
