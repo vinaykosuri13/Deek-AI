@@ -6,6 +6,7 @@ from search_tool import search_tool
 from chat_tool import chat_tool
 from memory_tool import memory_tool
 from memory_search_tool import memory_search_tool
+from calculator_tool import calculator_tool
 from response import Response
 
 TOOLS = {
@@ -13,6 +14,7 @@ TOOLS = {
     "CHAT": chat_tool,
     "MEMORY": memory_tool,
     "MEMORY_SEARCH": memory_search_tool,
+    "CALCULATOR": calculator_tool,
 }
 
 
@@ -41,4 +43,3 @@ def execute_plan(plan, request):
             request.context = last_response.message
 
     return last_response
-        
