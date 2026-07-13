@@ -1,51 +1,68 @@
-from ai import ask
-from search import search_web, format_results
-from memory import add_message
-from decision import needs_web_search
+# ==========================
+# DEEK AI APPLICATION
+# Version: 0.3
+# ==========================
+
+from controller import process_request
+from controller_v2 import ControllerV2
 
 print("=" * 40)
-print("🤖 DEEK AI v0.2 Alpha")
+print("🤖 DEEK AI v0.3")
 print("Created by Vinay Kosuri")
 print("=" * 40)
 
-while True:
+print("\nSelect Mode")
+print("1. Classic Deek")
+print("2. Deek AIOS")
 
-    question = input("\nYou: ")
+choice = input("\nChoice (1/2): ").strip()
 
-    if question.lower() == "exit":
-        print("\nDeek: Goodbye!")
-        break
+if choice == "2":
 
-    add_message("user", question)
+    controller = ControllerV2()
 
-    if needs_web_search(question):
+    print("\n🚀 AIOS Mode Activated")
 
-        print("\n🔍 Searching Internet...")
+    while True:
 
-        results = search_web(question)
+        question = input("\nYou: ")
 
-        context = format_results(results)
+        if question.lower() in [
 
-        prompt = f"""
-Use these search results to answer the user's question.
+            "exit",
+            "quit",
+            "bye"
 
-Search Results:
+        ]:
 
-{context}
+            print("\nDeek: Goodbye!")
+            break
 
-Question:
-{question}
-"""
+        response = controller.process(question)
 
-        answer = ask(prompt)
+        print("\nDeek:")
+        print(response.message)
 
-    else:
+else:
 
-        print("\n🧠 Using AI Knowledge...")
+    print("\n🧠 Classic Mode Activated")
 
-        answer = ask(question)
+    while True:
 
-    add_message("assistant", answer)
+        question = input("\nYou: ")
 
-    print("\nDeek:")
-    print(answer)
+        if question.lower() in [
+
+            "exit",
+            "quit",
+            "bye"
+
+        ]:
+
+            print("\nDeek: Goodbye!")
+            break
+
+        answer = process_request(question)
+
+        print("\nDeek:")
+        print(answer)
