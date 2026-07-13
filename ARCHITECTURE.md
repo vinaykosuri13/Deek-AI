@@ -1,111 +1,266 @@
-# Deek AI Architecture
+# 🏗️ DEEK AI ARCHITECTURE
 
-## Vision
+## Overview
 
-Build Deek into an intelligent AI assistant that can:
+Deek (Artificial Intelligence Operating System - AIOS) is Vinay Kosuri's Personal AI Operating System.
 
-- Think before answering
-- Search the internet when needed
-- Remember important information
-- Use tools
-- Control an Android phone (with user permission)
-- Learn and improve over time
+The architecture is modular. Every component has a single responsibility, making the system scalable, maintainable, and easy to extend.
 
 ---
 
-## Core Components
+# High-Level Architecture
 
-- Agent Controller
-- AI Brain
-- Memory Manager
-- Tool Manager
+User
+    │
+    ▼
+Controller
+    │
+    ▼
+Intent Detector
+    │
+    ▼
+Request
+    │
+    ▼
+Planner
+    │
+    ▼
+Tool Manager
+    │
+    ▼
+Tools
+    │
+    ▼
+Services (if required)
+    │
+    ▼
+Response
+    │
+    ▼
+Memory
+    │
+    ▼
+User
 
 ---
 
-## Status
+# Core Components
 
-🚧 Under Development
-# Intent System
+## Controller
 
-Deek understands user requests by identifying their intent.
+Coordinates the complete execution flow.
 
-## Supported Intents
+Responsibilities:
+- Receive user requests
+- Store conversation
+- Detect intent
+- Create Request object
+- Execute Planner
+- Execute Tool Manager
+- Return final response
 
-### CHAT
-General conversation and questions.
+---
+
+## Intent Detector
+
+Determines the user's primary intent.
+
+Examples:
+- CHAT
+- SEARCH
+- WEATHER
+- DATETIME
+- CALCULATOR
+- MEMORY
+- MEMORY_SEARCH
+
+---
+
+## Request
+
+Carries all information about the current task.
+
+Current fields:
+- intent
+- question
+- context
+
+Future versions may include session, metadata, memory, and execution history.
+
+---
+
+## Planner
+
+Creates an execution plan from the Request.
 
 Example:
-- What is Python?
-- Explain TCP/IP
+
+Request
+
+↓
+
+SEARCH
+
+↓
+
+CHAT
+
+↓
+
+MEMORY
+
+The Planner decides what should happen, not how it is executed.
 
 ---
 
-### SEARCH
-Questions requiring current information.
+## Tool Manager
 
-Example:
-- Latest AI news
-- Weather today
-- Bitcoin price
+Executes the Planner's execution plan.
 
----
-
-### CALCULATOR
-Mathematical calculations.
-
-Example:
-- 45 × 87
-- 100 / 25
+Responsibilities:
+- Load tools
+- Execute tools in order
+- Pass context between tools
+- Return final Response
 
 ---
 
-### PHONE
-Phone-related actions.
+## Response
 
-Example:
-- Call Dad
-- Dial Rahul
+Standard communication object used throughout Deek.
 
----
-
-### MESSAGE
-Messaging actions.
-
-Example:
-- Send "I'm coming" to Rahul
+Current fields:
+- success
+- message
+- source
+- data
+- results
+- metadata
 
 ---
 
-### APP
-Open installed applications.
+# AI Engine
 
-Example:
-- Open YouTube
-- Launch WhatsApp
+The AI Engine provides reasoning and language generation.
+
+Responsibilities:
+- Load the language model
+- Execute prompts
+- Generate responses
+
+The AI Engine is isolated from the rest of the architecture so models can be replaced without affecting other components.
 
 ---
 
-### MEMORY
-Remember or recall information.
+# Memory System
 
-Example:
-- Remember my name is Vinay
-- What is my name?
-# Tool Manager
+Current capabilities:
+- Store conversation
+- Retrieve conversation
+- Search conversation
 
-The Tool Manager is responsible for selecting and executing the correct tool based on the user's intent.
+Future versions:
+- Short-term memory
+- Long-term memory
+- User preferences
+- Project memory
+- Semantic search
 
-## Planned Tools
+---
 
-- AI Tool
+# Tools
+
+Tools perform user-facing capabilities.
+
+Current tools:
+- Chat Tool
 - Search Tool
-- Memory Tool
 - Calculator Tool
-- Phone Tool
-- Message Tool
-- App Tool
-- Camera Tool
-- File Tool
+- Weather Tool
+- Date & Time Tool
+- Memory Tool
+- Memory Search Tool
 
-The controller sends the detected intent to the Tool Manager.
-The Tool Manager decides which tool to execute and returns the result.
+Every tool:
+- Receives a Request
+- Returns a Response
+
+---
+
+# Services
+
+Services communicate with external systems.
+
+Current services:
+- Search Service
+- Weather Service
+
+Services never interact directly with the user.
+
+---
+
+# Plugin System
+
+Plugin Loader automatically discovers all available tools.
+
+Benefits:
+- No manual registration
+- Easy extensibility
+- Scalable architecture
+
+---
+
+# Rule System
+
+Rule Loader automatically discovers planning rules.
+
+Benefits:
+- Modular planning
+- Easy expansion
+- No Planner modification required
+
+---
+
+# Testing
+
+The project includes an automated test discovery system.
+
+Current testing verifies:
+- Module loading
+- Import validation
+
+Future testing will include:
+- Functional tests
+- Integration tests
+- Performance tests
+
+---
+
+# Design Principles
+
+Every component should:
+
+- Have a single responsibility.
+- Be modular.
+- Be reusable.
+- Be extensible.
+- Avoid duplicated logic.
+- Follow the Request → Tool → Response architecture.
+
+---
+
+# Future Vision
+
+Deek will evolve from a modular AI assistant into Vinay Kosuri's Personal Artificial Intelligence Operating System (AIOS).
+
+Future capabilities include:
+- Advanced reasoning
+- Long-term memory
+- Workflow automation
+- Task management
+- Calendar integration
+- File management
+- Voice interaction
+- Vision capabilities
+- Multi-device support
+- Intelligent digital life management
